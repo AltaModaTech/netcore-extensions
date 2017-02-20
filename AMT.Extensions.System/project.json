@@ -16,10 +16,11 @@
   "authors": [
     "AltaModaTech"
   ],
+  "title": "AMT System Extensions",
   "description": "AltaModa Technologies .NET Extensions",
 
   "packOptions": {
-    "projectUrl": "https://github.com/AltaModaTech/Extensions.Net",
+    "projectUrl": "https://github.com/AltaModaTech/netcore-extensions",
     "owners": [
       "AltaModaTech"
     ],
