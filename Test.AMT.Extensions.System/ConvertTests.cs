@@ -8,6 +8,7 @@ namespace SystemTests
 {
     public class ConvertTests
     {
+        [Fact]
         public void can_encode_decode_string_arrays() 
         {
             foreach (var unencoded in _validStrings)
