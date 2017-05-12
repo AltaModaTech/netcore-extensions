@@ -6,6 +6,8 @@
     <AssemblyTitle>AMT System Extensions</AssemblyTitle>
     <VersionPrefix>0.9.1</VersionPrefix>
     <Authors>AltaModa Technologies</Authors>
+    <VersionPrefix>0.9.0</VersionPrefix>
+    <Authors>AltaModaTech</Authors>
     <TargetFramework>netstandard1.0</TargetFramework>
     <DebugType>portable</DebugType>
     <AssemblyName>AMT.Extensions.System</AssemblyName>
