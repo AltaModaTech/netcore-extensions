@@ -8,7 +8,7 @@
     "tasks": [
         {
             "taskName": "build",
-            "args": [ "AMT.Extensions.System" ],
+            "args": [ "netcore-extensions.sln" ],
             "isBuildCommand": true,
             "showOutput": "silent",
             "problemMatcher": "$msCompile"
