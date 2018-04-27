@@ -4,9 +4,9 @@
     <Description>AltaModa Technologies .NET Extensions</Description>
     <AssemblyCompany>AltaModa Technologies</AssemblyCompany>
     <AssemblyTitle>AMT System Extensions</AssemblyTitle>
-    <VersionPrefix>0.9.2</VersionPrefix>
+    <VersionPrefix>0.9.3</VersionPrefix>
     <Authors>AltaModa Technologies</Authors>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>AMT.Extensions.System</AssemblyName>
     <PackageId>AMT.Extensions.System</PackageId>

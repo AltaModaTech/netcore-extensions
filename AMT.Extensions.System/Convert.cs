@@ -10,33 +10,39 @@ namespace AMT.Extensions.System
             ToBase64UrlString and FromBase64UrlString
             based on comments in https://github.com/dotnet/orleans/issues/2380
         */
-        public static string ToBase64UrlString(char[] data, Encoding encoding = null)
-        {
-            // Use UTF8 by default
-            if (null == encoding) { encoding = new UTF8Encoding(); }
 
-            return global::System.Convert.ToBase64String(encoding.GetBytes(data))
-                .Replace("=", string.Empty) // replace = end padding
-                .Replace('+', '-')          // replace + with -
-                .Replace('/', '_');         // replace / with _
+        public static string ToBase64UrlString(Uri uri)
+        {
+            if (null == uri)  { throw new ArgumentNullException("uri"); }
+
+            return global::System.Convert.ToBase64String( Encoding.UTF8.GetBytes(uri.AbsoluteUri))
+                .Replace("=", string.Empty).Replace('+', '-').Replace('/', '_');
         }
 
 
-        public static string ToBase64UrlString(byte[] data, Encoding encoding = null)
+        public static string ToBase64UrlString(string key)
         {
-            // Use UTF8 by default
-            if (null == encoding) { encoding = new UTF8Encoding(); }
+            if (null == key)  { throw new ArgumentNullException("key"); }
+            if (0 == key.Length)  { throw new ArgumentOutOfRangeException("key", "Must not be empty."); }
 
-            return ToBase64UrlString(encoding.GetString(data, 0, data.Length).ToCharArray(), encoding);
+            string encodedKey = global::System.Convert.ToBase64String(Encoding.UTF8.GetBytes(key))
+                .Replace("=", string.Empty).Replace('+', '-').Replace('/', '_');
+
+            return encodedKey;
         }
 
 
-        public static byte[] FromBase64UrlString(string base64UrlData)
+        public static string FromBase64UrlString(string encodedKey)
         {
-            return global::System.Convert.FromBase64String(
-                base64UrlData.Replace('-', '+').Replace('_', '/')
-                .PadRight(base64UrlData.Length + (4 - base64UrlData.Length % 4) % 4, '=')
-            );
+            if (null == encodedKey)  { throw new ArgumentNullException("encodedKey"); }
+            if (0 == encodedKey.Length)  { throw new ArgumentOutOfRangeException("encodedKey", "Must not be empty."); }
+
+            var forDecode = global::System.Convert.FromBase64String(
+                encodedKey.Replace('-', '+').Replace('_', '/')
+                .PadRight(encodedKey.Length + (4 - encodedKey.Length % 4) % 4, '='));
+            string decodedKey = Encoding.UTF8.GetString(forDecode, 0, forDecode.Length);
+            
+            return decodedKey;
         }
 
     }

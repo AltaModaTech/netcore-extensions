@@ -1,4 +1,5 @@
 ﻿using Ext = AMT.Extensions.System;
+using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -8,13 +9,14 @@ namespace SystemTests
 {
     public class ConvertTests
     {
+
         [Fact]
         public void can_encode_decode_string_arrays() 
         {
             foreach (var unencoded in _validStrings)
             {
                 // encode with base64url
-                string encoded = Ext.Convert.ToBase64UrlString(unencoded.ToCharArray());
+                string encoded = Ext.Convert.ToBase64UrlString(unencoded);
                 // decode the base64url encoded
                 string decoded = Convert.ToString(Ext.Convert.FromBase64UrlString(encoded));
 
@@ -24,11 +26,70 @@ namespace SystemTests
         }
 
 
+        [Fact]
+        public void can_encode_decode_Uris() 
+        {
+            foreach (var unencoded in _validUris)
+            {
+                // encode with base64url
+                string encoded = Ext.Convert.ToBase64UrlString(unencoded);
+                // decode the base64url encoded
+                string decoded = Convert.ToString(Ext.Convert.FromBase64UrlString(encoded));
+
+                // decoded should be equal to the original
+                Assert.Equal(unencoded.AbsoluteUri, decoded);
+            }
+        }
+
+
+        [Fact]
+        public void excp_on_null()
+        {
+            // Verify proper exception when string is null
+            string nullStr = null;
+
+            Action act = () => {
+                Ext.Convert.ToBase64UrlString(nullStr);
+            };
+
+            act.ShouldThrow<ArgumentNullException>();
+
+
+            // Verify proper exception when Uri is null
+            Uri nullUri = null;
+
+            act = () => {
+                Ext.Convert.ToBase64UrlString(nullUri);
+            };
+
+            act.ShouldThrow<ArgumentNullException>();
+        }
+
+
+        [Fact]
+        public void excp_on_empty_string()
+        {
+            // Verify proper exception when string is empty
+            Action act = () => {
+                Ext.Convert.ToBase64UrlString(string.Empty);
+            };
+
+            act.ShouldThrow<ArgumentOutOfRangeException>();
+        }
+
+
+
         private List<string> _validStrings = new List<string> {
-            "j", "jb7466", 
-            "https://AltaModaTech.com/?qryWithNoPurpose=123abc&purposeless=!@#$%^&*()",
-            string.Empty
+            "j"
+            ,"jb7466"
+            ,"https://AltaModaTech.com/?qryWithNoPurpose=123abc&purposeless=!@#$%^&*()"
         };
 
+        private List<Uri> _validUris = new List<Uri> {
+            new Uri("https://AltaModaTech.com/")
+            ,new Uri("https://AltaModaTech.com/?qryWithNoPurpose=123abc&purposeless=!@#$%^&*()")
+            ,new Uri("https://username@AltaModaTech.com:7466/?qryWithNoPurpose=123abc&purposeless=!@#$%^&*()_+&1234567890-=")
+            // TODO: add more chars in url; add escaped chars
+        };
     }
 }
