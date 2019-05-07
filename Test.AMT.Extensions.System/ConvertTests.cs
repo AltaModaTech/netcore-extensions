@@ -52,7 +52,7 @@ namespace SystemTests
                 Ext.Convert.ToBase64UrlString(nullStr);
             };
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
 
 
             // Verify proper exception when Uri is null
@@ -62,7 +62,7 @@ namespace SystemTests
                 Ext.Convert.ToBase64UrlString(nullUri);
             };
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
 
@@ -74,7 +74,7 @@ namespace SystemTests
                 Ext.Convert.ToBase64UrlString(string.Empty);
             };
 
-            act.ShouldThrow<ArgumentOutOfRangeException>();
+            act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
 
