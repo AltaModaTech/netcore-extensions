@@ -4,9 +4,9 @@
     <Description>AltaModa Technologies .NET Extensions</Description>
     <AssemblyCompany>AltaModa Technologies</AssemblyCompany>
     <AssemblyTitle>AMT System Extensions</AssemblyTitle>
-    <VersionPrefix>0.9.3</VersionPrefix>
+    <VersionPrefix>0.9.4</VersionPrefix>
     <Authors>AltaModa Technologies</Authors>
-    <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>AMT.Extensions.System</AssemblyName>
     <PackageId>AMT.Extensions.System</PackageId>
@@ -14,9 +14,5 @@
     <PackageProjectUrl>https://github.com/AltaModaTech/netcore-extensions</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Text.Encoding" Version="4.3.*" />
-  </ItemGroup>
 
 </Project>
