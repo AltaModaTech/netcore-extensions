@@ -1,0 +1,32 @@
+<Project>
+
+  <Import Project="./common.props" />
+
+
+  <!-- Target frameworks  -->
+  <PropertyGroup>
+      <TargetFrameworks>netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+  </PropertyGroup>
+
+
+  <!-- Packages for test support  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+    <PackageReference Include="xunit" Version="2.*" />
+    <PackageReference Include="xunit.abstractions" Version="2.*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
+    <PackageReference Include="FluentAssertions" Version="5.*" />
+    <PackageReference Include="Moq" Version="*" />
+    <!-- <PackageReference Include="MockLoggerExtensions" Version="*" /> -->
+  </ItemGroup>
+
+  <!-- Assembly and NuGet package attributes  -->
+  <PropertyGroup>
+    <!-- Associate test assemblies with J3DI product -->
+    <Product>J3DI</Product>
+    
+    <!-- Exclude assemblies from packing for NuGet -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>

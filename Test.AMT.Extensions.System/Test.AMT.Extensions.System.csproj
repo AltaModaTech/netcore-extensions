@@ -1,24 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../common.test.props" />
+
   <PropertyGroup>
-    <VersionPrefix>0.9.5</VersionPrefix>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
-    <DebugType>portable</DebugType>
     <AssemblyName>Test.AMT.Extensions.System</AssemblyName>
-    <IsPackable>false</IsPackable>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <PackageId>Test.AMT.Extensions.System</PackageId>
   </PropertyGroup>
 
+  <!-- References to test targets -->
   <ItemGroup>
     <ProjectReference Include="..\AMT.Extensions.System\AMT.Extensions.System.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
-    <PackageReference Include="xunit" Version="2.*" />
-    <PackageReference Include="FluentAssertions" Version="5.*" />
   </ItemGroup>
 
 </Project>
