@@ -1,21 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../common.prod.props" />
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
+    <!-- Assembly properties -->
+    <Product>AMT.Extensions.Logging</Product>
     <Description>AltaModa Technologies .NET Extensions</Description>
-    <AssemblyCompany>AltaModa Technologies</AssemblyCompany>
-    <AssemblyTitle>AMT Logging Extensions</AssemblyTitle>
-    <VersionPrefix>0.9.4</VersionPrefix>
-    <Authors>AltaModa Technologies</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <DebugType>portable</DebugType>
     <AssemblyName>AMT.Extensions.Logging</AssemblyName>
-    <PackageId>AMT.Extensions.Logging</PackageId>
-    <PackageTags>core;extensions;logging</PackageTags>
-    <PackageProjectUrl>https://github.com/AltaModaTech/netcore-extensions</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <AssemblyTitle>AltaModa Technologies' extensions to .NET Logging </AssemblyTitle>
+    <!-- NuGet package properties -->
+    <PackageId>AMT.Extensions.System</PackageId>
   </PropertyGroup>
+
 </Project>
