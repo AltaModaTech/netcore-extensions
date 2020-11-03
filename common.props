@@ -1,0 +1,28 @@
+<Project>
+
+    <!-- Company, copyright -->
+    <PropertyGroup>
+        <Copyright>AltaModa Technologies 2020</Copyright>
+        <Company>AltaModa Technologies</Company>
+        <Authors>@jburnett</Authors>
+    </PropertyGroup>
+
+
+    <!-- Assembly version & attribute controls -->
+    <PropertyGroup>
+        <!-- Associate test assemblies with AltaModa Extensions -->
+        <Product>AltaModa .NET Extensions</Product>
+    
+        <VersionPrefix>0.9.5</VersionPrefix>
+
+        <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
+        <GenerateAssemblyCompanyAttribute>true</GenerateAssemblyCompanyAttribute>
+        <GenerateAssemblyProductAttribute>true</GenerateAssemblyProductAttribute>
+    </PropertyGroup>
+
+     <!-- Packages used by all  -->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.*" />
+    </ItemGroup>
+
+</Project>

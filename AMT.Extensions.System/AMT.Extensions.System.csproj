@@ -1,18 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../common.prod.props" />
+
   <PropertyGroup>
+    <!-- Assembly properties -->
+    <Product>AMT.Extensions.System</Product>
     <Description>AltaModa Technologies .NET Extensions</Description>
-    <AssemblyCompany>AltaModa Technologies</AssemblyCompany>
-    <AssemblyTitle>AMT System Extensions</AssemblyTitle>
-    <VersionPrefix>0.9.5</VersionPrefix>
-    <Authors>AltaModa Technologies</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <DebugType>portable</DebugType>
     <AssemblyName>AMT.Extensions.System</AssemblyName>
+    <AssemblyTitle>AltaModa Technologies' extensions to .NET System</AssemblyTitle>
+    <!-- NuGet package properties -->
     <PackageId>AMT.Extensions.System</PackageId>
-    <PackageTags>core;extensions;base64url</PackageTags>
-    <PackageProjectUrl>https://github.com/AltaModaTech/netcore-extensions</PackageProjectUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>

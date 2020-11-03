@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../common.prod.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Assembly properties -->
+    <Product>AMT.Extensions.Logging</Product>
+    <Description>AltaModa Technologies .NET Extensions</Description>
+    <AssemblyName>AMT.Extensions.Logging</AssemblyName>
+    <AssemblyTitle>AltaModa Technologies' extensions to .NET Logging </AssemblyTitle>
+    <!-- NuGet package properties -->
+    <PackageId>AMT.Extensions.System</PackageId>
+  </PropertyGroup>
+
+</Project>
