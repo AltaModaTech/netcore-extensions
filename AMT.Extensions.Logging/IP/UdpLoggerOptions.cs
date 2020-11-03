@@ -4,21 +4,24 @@
 
 namespace AMT.Extensions.Logging.IP
 {
+    using System;
     using System.Net;
 
     public class UdpLoggerOptions
     {
+        public IPEndPoint IPEndPoint { get; private set; }
         public UdpLoggerOptions(IPEndPoint endPoint)
         {
-            _destinationEP = endPoint;
+            if (null == endPoint)  { throw new ArgumentNullException(nameof(endPoint)); }
+            this.IPEndPoint = endPoint;
         }
 
         public UdpLoggerOptions()
         {
-            _destinationEP = new IPEndPoint(IPAddress.Loopback, UdpLoggerOptions.DefaultPort);
+            this.IPEndPoint = new IPEndPoint(DefaultAddress, DefaultPort);
         }
 
-        private IPEndPoint _destinationEP;
+        public static readonly IPAddress DefaultAddress = IPAddress.Loopback;
         public static readonly int DefaultPort = 17466;
     }
 }
