@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 
 namespace AMT.Extensions.Logging.IP
@@ -12,57 +13,56 @@ namespace AMT.Extensions.Logging.IP
 
     public class UdpLogger : ILogger
     {
-
-        public UdpLogger(UdpLoggerProvider provider, ILogger logger = null, string category = null)
+        public UdpLogger(string name)
         {
-            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
-            _logger = logger;
+            _name = name;
 
             // see https://github.com/serilog/serilog-extensions-logging/blob/dev/src/Serilog.Extensions.Logging/Extensions/Logging/SerilogLogger.cs
             //  re: adding logger to context
-
-            if (null != category)
-            {
-                _logger = _logger.ForContext(Constants.SourceContextPropertyName, category);
-            }
         }
 
 
 
         #region ILogger impl
 
+
+        /// <inheritdoc />
         public IDisposable BeginScope<TState>(TState state)
         {
-            return _provider.BeginScope(state);
+            return NullScope.Instance;
         }
 
+        /// <inheritdoc />
         public bool IsEnabled(LogLevel logLevel)
         {
-            return _logger.IsEnabled(logLevel);
+            return logLevel != LogLevel.None;
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            var level = LevelConvert.ToSerilogLevel(logLevel);
-            if (!_logger.IsEnabled(level))
+
+            if (!IsEnabled(logLevel))
             {
                 return;
             }
 
             try
             {
-                Write(level, eventId, state, exception, formatter);
+                // Send log message
+                Console.WriteLine(formatter.ToString());
+                // Write(logLevel, eventId, state, exception, formatter);
+                // Write(level, eventId, state, exception, formatter);
             }
             catch (Exception ex)
             {
-                SelfLog.WriteLine($"Failed to write event through {typeof(SerilogLogger).Name}: {ex}");
+                // SelfLog.WriteLine($"Failed to write event through {typeof(SerilogLogger).Name}: {ex}");
+                throw;
             }
         }
 
         #endregion ILogger impl
-
-
-        readonly ILogger _logger;
-        readonly ILoggerProvider _provider;
+        
+        
+        readonly string _name;
     }
 }

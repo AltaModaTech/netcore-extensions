@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../common.test.props" />
+
+  <PropertyGroup>
+    <AssemblyName>Test.AMT.Extensions.Logging</AssemblyName>
+  </PropertyGroup>
+
+  <!-- References to test targets -->
+  <ItemGroup>
+    <ProjectReference Include="..\AMT.Extensions.Logging\AMT.Extensions.Logging.csproj" />
+  </ItemGroup>
+
+</Project>
