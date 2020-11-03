@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet: ['2.2.103, '3.1.301']
+        dotnet: ['2.2.103', '3.1.301']
     name: Build and test for .NETCore ${{ matrix.dotnet }}
     
     steps:
