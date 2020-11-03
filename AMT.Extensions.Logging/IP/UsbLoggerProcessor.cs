@@ -3,24 +3,24 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Threading;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Options;
 
 namespace AMT.Extensions.Logging.IP
 {
 
-    public class UdpLoggerProcessor
+    public class UdpLoggerProcessor : IDisposable
     {
         private const int _maxQueuedMessages = 1024;
 
         private readonly BlockingCollection<LogMessageEntry> _messageQueue = new BlockingCollection<LogMessageEntry>(_maxQueuedMessages);
         private readonly Thread _outputThread;
+        private readonly UdpLoggerOptions _options;
 
-        public UdpLoggerProcessor()
+        public UdpLoggerProcessor(UdpLoggerOptions options)
         {
+            if (null == options)  { throw new ArgumentNullException(nameof(options)); }
+            _options = options;
+            
             // Start message queue processor
             _outputThread = new Thread(ProcessLogQueue)
             {
@@ -74,6 +74,8 @@ namespace AMT.Extensions.Logging.IP
             }
         }
 
+        #region IDisposable impl
+
         public void Dispose()
         {
             _messageQueue.CompleteAdding();
@@ -84,5 +86,7 @@ namespace AMT.Extensions.Logging.IP
             }
             catch (ThreadStateException) { }
         }
+
+        #endregion IDisposable impl
     }
 }
