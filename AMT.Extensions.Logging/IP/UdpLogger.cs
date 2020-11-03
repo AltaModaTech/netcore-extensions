@@ -13,9 +13,11 @@ namespace AMT.Extensions.Logging.IP
 
     public class UdpLogger : ILogger
     {
-        public UdpLogger(string name)
+        public UdpLogger(string name, UdpLoggerProcessor processor)
         {
+            if (null == name)  { throw new ArgumentNullException(nameof(name)); }
             _name = name;
+            _processor = processor;
 
             // see https://github.com/serilog/serilog-extensions-logging/blob/dev/src/Serilog.Extensions.Logging/Extensions/Logging/SerilogLogger.cs
             //  re: adding logger to context
@@ -48,12 +50,16 @@ namespace AMT.Extensions.Logging.IP
 
             try
             {
+                // TODO: require LogMessageEntry in params?
+                var entry = new LogMessageEntry {
+                    LogLevel = logLevel,
+                    EventId = eventId,
+                    Message = formatter.Invoke(state, exception)
+                };
                 // Send log message
-                Console.WriteLine(formatter.ToString());
-                // Write(logLevel, eventId, state, exception, formatter);
-                // Write(level, eventId, state, exception, formatter);
+                _processor.EnqueueMessage(entry);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 // SelfLog.WriteLine($"Failed to write event through {typeof(SerilogLogger).Name}: {ex}");
                 throw;
@@ -62,7 +68,7 @@ namespace AMT.Extensions.Logging.IP
 
         #endregion ILogger impl
         
-        
-        readonly string _name;
+        private readonly UdpLoggerProcessor _processor;        
+        private readonly string _name;
     }
 }
