@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Xunit;
 
 
-namespace IPTests
+namespace Test.AMT.Extensions.Logging.IP
 {
     public class UdpLoggerTests
     {
