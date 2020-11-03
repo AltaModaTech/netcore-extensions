@@ -10,6 +10,9 @@
 
     <!-- Assembly version & attribute controls -->
     <PropertyGroup>
+        <!-- Associate test assemblies with AltaModa Extensions -->
+        <Product>AltaModa .NET Extensions</Product>
+    
         <VersionPrefix>0.9.5</VersionPrefix>
 
         <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
