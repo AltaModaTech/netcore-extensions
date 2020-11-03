@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.AMT.Extensions.System"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMT.Extensions.Logging", "AMT.Extensions.Logging\AMT.Extensions.Logging.csproj", "{BB194E01-F859-4D11-93A6-A42AB51B1C4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.AMT.Extensions.Logging", "Test.AMT.Extensions.Logging\Test.AMT.Extensions.Logging.csproj", "{45F211E5-7490-4795-B660-6168DDE1F3A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{BB194E01-F859-4D11-93A6-A42AB51B1C4D}.Release|x64.Build.0 = Release|Any CPU
 		{BB194E01-F859-4D11-93A6-A42AB51B1C4D}.Release|x86.ActiveCfg = Release|Any CPU
 		{BB194E01-F859-4D11-93A6-A42AB51B1C4D}.Release|x86.Build.0 = Release|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Debug|x64.Build.0 = Debug|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Debug|x86.Build.0 = Debug|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Release|x64.ActiveCfg = Release|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Release|x64.Build.0 = Release|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Release|x86.ActiveCfg = Release|Any CPU
+		{45F211E5-7490-4795-B660-6168DDE1F3A0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
