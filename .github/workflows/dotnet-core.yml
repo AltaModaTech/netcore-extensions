@@ -10,13 +10,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        dotnet: ['2.2.103, '3.1.301']
+    name: Build and test for .NETCore ${{ matrix.dotnet }}
+    
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
+        dotnet-version: ${{ matrix.dotnet }}
     - name: Install dependencies
       run: dotnet restore
     - name: Build
