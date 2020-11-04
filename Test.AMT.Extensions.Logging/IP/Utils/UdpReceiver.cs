@@ -11,11 +11,9 @@ namespace Test.AMT.Extensions.Logging.IP
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Net;
-    using System.Threading;
 
     internal class UdpReceiver
     {
-        // private readonly Thread _listernerThread;
         private static int _maxQueuedMessages = 1024;
         private readonly BlockingCollection<string> _messageQueue = new BlockingCollection<string>(_maxQueuedMessages);
 
@@ -27,27 +25,21 @@ namespace Test.AMT.Extensions.Logging.IP
             _stopListener = false;
 
             _client = new UdpClient(options.IPEndPoint);
-            _client.BeginReceive(new AsyncCallback(ProcessReceived), this);
-
+            var ar = _client.BeginReceive(new AsyncCallback(ProcessReceived), this);
         }
 
         public void Stop()
         {
             _stopListener = true;
+            _messageQueue.CompleteAdding();
         }
 
 
-        public IList<string> ConsumeMessages()
+        public IEnumerable<string> RetrieveMessages()
         {
-            var list = new List<string>(_messageQueue.Count);
-
-            // await Task.Run(async() =>
-            // {
-
-            // });
-            // list.AddRange(_messageQueue.GetConsumingEnumerable());
-
+            return _messageQueue.GetConsumingEnumerable();
         }
+
 
         void ProcessReceived(IAsyncResult ar)
         {
@@ -56,16 +48,17 @@ namespace Test.AMT.Extensions.Logging.IP
 
             while (!_stopListener)
             {
-                // Receive Udp data
-                byte[] message = udpReceiver._client.EndReceive(ar, ref senderIP);
-                // Store it
-                _messageQueue.Add(System.Text.Encoding.ASCII.GetString(message));
-                // Listen again
-                udpReceiver._client.BeginReceive(new AsyncCallback(ProcessReceived), this);
+                var r = udpReceiver._client.ReceiveAsync().Result;
+
+                if (r.Buffer.Length > 0)
+                {
+                    string msg = System.Text.Encoding.ASCII.GetString(r.Buffer);
+                    udpReceiver._messageQueue.Add(msg);
+                }
             }
 
+            // TODO: need to call EndReceive here?
         }
-
 
     }
 }

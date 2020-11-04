@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Microsoft.Extensions.Logging;
+using System;
 
 
 namespace AMT.Extensions.Logging.IP
@@ -13,12 +14,19 @@ namespace AMT.Extensions.Logging.IP
     public class UdpLoggerProvider : ILoggerProvider, ISupportExternalScope
     {
 
+        public UdpLoggerProvider(UdpLoggerOptions options)
+        {
+            if (null == options)  { throw new ArgumentNullException(nameof(options)); }
+            Options = options;
+        }
+
+
         #region ILoggerProvider impl
 
         public ILogger CreateLogger(string category)
         {
             // TODO: gather options from config
-            return new UdpLogger(category, new UdpLoggerProcessor(new UdpLoggerOptions()));
+            return new UdpLogger(category, new UdpLoggerProcessor(Options));
         }
 
         #endregion ILoggerProvider impl
@@ -45,6 +53,8 @@ namespace AMT.Extensions.Logging.IP
 
         #endregion IDisposable impl
 
+
+        public UdpLoggerOptions Options { get; set; }
 
         private IExternalScopeProvider _scopeProvider = NullExternalScopeProvider.Instance;
 

@@ -10,7 +10,7 @@ namespace AMT.Extensions.Logging.IP
 
     public class UdpLogger : ILogger
     {
-        public UdpLogger(string name, UdpLoggerProcessor processor)
+        internal UdpLogger(string name, UdpLoggerProcessor processor)
         {
             if (null == name)  { throw new ArgumentNullException(nameof(name)); }
             _name = name;
