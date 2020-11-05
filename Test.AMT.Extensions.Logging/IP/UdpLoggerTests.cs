@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using System;
 using Xunit;
+using Xunit.Abstractions;
 
 
 namespace Test.AMT.Extensions.Logging.IP
@@ -11,11 +12,11 @@ namespace Test.AMT.Extensions.Logging.IP
     {
 
         [Fact]
-        public void Test2()
+        public void verify_few_log_messages()
         {
             // Prepare listener to receive messages
             var opts = new Ext.UdpLoggerOptions();
-            Console.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
+            testLog.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
             var r = new UdpReceiver();
             r.Start(opts);
 
@@ -40,18 +41,27 @@ namespace Test.AMT.Extensions.Logging.IP
             foreach (var msg in r.RetrieveMessages()) 
             {
                 ++msgCount;
-                Console.WriteLine($"TESTOUT: {msg}");
             }
             msgCount.Should().Be(3);
         }
 
 
+        #region ITestOutputHelper
+        private readonly ITestOutputHelper testLog;
+
+        public UdpLoggerTests(ITestOutputHelper outputHelper)
+        {
+            this.testLog = outputHelper;
+        }
+        #endregion ITestOutputHelper
+
+
 
         private ILoggerProvider _provider;
         private readonly object DEFAULT_STATE = "### Default state for testing ###";
-        private readonly object NULL_STATE = "make-me-null"; // TODO: use null
+        private readonly object NULL_STATE = "[null-state]"; // TODO: use null;
         private readonly Exception DEFAULT_EXCEPTION = new Exception("### Default exception for testing Logging ###");
-        private readonly Exception NULL_EXCEPTION = null;
+        private readonly Exception NULL_EXCEPTION = new Exception("[null-exception]"); // TODO: use null;
         private readonly EventId DEFAULT_EVENTID = new EventId();
         private readonly Func<object, Exception, string> setStringFormatter = (state, exception) => $"{state}, {exception}";
         

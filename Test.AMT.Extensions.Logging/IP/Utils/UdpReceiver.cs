@@ -25,7 +25,24 @@ namespace Test.AMT.Extensions.Logging.IP
             _stopListener = false;
 
             _client = new UdpClient(options.IPEndPoint);
-            var ar = _client.BeginReceive(new AsyncCallback(ProcessReceived), this);
+
+            var senderIP = new IPEndPoint(0,0);
+
+            // Spawn Udp receiver
+            System.Threading.Tasks.Task.Run( () => {
+
+                while (!_stopListener)
+                {
+                    var r = _client.ReceiveAsync().Result;
+
+                    if (r.Buffer.Length > 0)
+                    {
+                        string msg = System.Text.Encoding.ASCII.GetString(r.Buffer);
+                        _messageQueue.Add(msg);
+                    }
+                }
+            });
+
         }
 
         public void Stop()
@@ -38,26 +55,6 @@ namespace Test.AMT.Extensions.Logging.IP
         public IEnumerable<string> RetrieveMessages()
         {
             return _messageQueue.GetConsumingEnumerable();
-        }
-
-
-        void ProcessReceived(IAsyncResult ar)
-        {
-            var udpReceiver = (UdpReceiver) ar.AsyncState;
-            var senderIP = new IPEndPoint(0,0);
-
-            while (!_stopListener)
-            {
-                var r = udpReceiver._client.ReceiveAsync().Result;
-
-                if (r.Buffer.Length > 0)
-                {
-                    string msg = System.Text.Encoding.ASCII.GetString(r.Buffer);
-                    udpReceiver._messageQueue.Add(msg);
-                }
-            }
-
-            // TODO: need to call EndReceive here?
         }
 
     }

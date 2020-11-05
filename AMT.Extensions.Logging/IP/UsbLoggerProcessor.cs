@@ -62,9 +62,7 @@ namespace AMT.Extensions.Logging.IP
                 string.Format($"{entry.Message} (sent {DateTime.Now})")
             );
 
-            // _udpSender.Connect(_options.IPEndPoint);
             int sent = _udpSender.Send(buff, buff.Length, _options.IPEndPoint);
-            Console.WriteLine($"processor WriteMessage sent {sent} bytes");
         }
 
         private void ProcessLogQueue()
