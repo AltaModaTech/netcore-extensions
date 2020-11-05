@@ -12,7 +12,7 @@ namespace Test.AMT.Extensions.Logging.IP
     using System.Collections.Generic;
     using System.Net;
 
-    internal class UdpReceiver
+    internal class UdpReceiver : IDisposable
     {
         private static int _maxQueuedMessages = 1024;
         private readonly BlockingCollection<string> _messageQueue = new BlockingCollection<string>(_maxQueuedMessages);
@@ -56,6 +56,19 @@ namespace Test.AMT.Extensions.Logging.IP
         {
             return _messageQueue.GetConsumingEnumerable();
         }
+
+        #region IDisposable impl
+        public void Dispose()
+        {
+            if (null != _client)
+            {
+                _client.Close();
+                _client.Dispose();
+                _client = null;
+            }
+        }
+        #endregion IDisposable impl
+
 
     }
 }
