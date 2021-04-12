@@ -1,29 +1,33 @@
-name: .NET Core
+name: .NET Core Builds
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ dev ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet: ['2.1.814', '3.1.407', '5.0.202']
-    name: Build and test for .NETCore ${{ matrix.dotnet }}
-    
+
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET 5.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet }}
+        dotnet-version: 5.0.202
+    - name: Setup .NET Core 3.1
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.407
+    - name: Setup .NET Core 2.1
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.1.814
     - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+    - name: Test.Mutant
+      run: dotnet test --no-restore --verbosity normal ./Test.Mutant/Test.Mutant.csproj
