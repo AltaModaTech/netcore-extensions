@@ -30,4 +30,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test.Mutant
-      run: dotnet test --no-restore --verbosity normal ./Test.Mutant/Test.Mutant.csproj
+      run: dotnet test --no-restore --verbosity normal 
