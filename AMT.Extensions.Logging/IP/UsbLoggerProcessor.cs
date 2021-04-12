@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace AMT.Extensions.Logging.IP
@@ -15,13 +16,18 @@ namespace AMT.Extensions.Logging.IP
         private readonly BlockingCollection<LogMessageEntry> _messageQueue = new BlockingCollection<LogMessageEntry>(_maxQueuedMessages);
         private readonly Thread _outputThread;
         private readonly UdpLoggerOptions _options;
+        private UdpClient _udpSender;
+        private bool _shutdown = false;
 
         public UdpLoggerProcessor(UdpLoggerOptions options)
         {
             if (null == options)  { throw new ArgumentNullException(nameof(options)); }
             _options = options;
             
+            _udpSender = new UdpClient(); //options.IPEndPoint);
+
             // Start message queue processor
+            _shutdown = false;
             _outputThread = new Thread(ProcessLogQueue)
             {
                 IsBackground = true,
@@ -52,39 +58,51 @@ namespace AMT.Extensions.Logging.IP
 
         internal virtual void WriteMessage(LogMessageEntry entry)
         {
-            Console.Write(entry.Message);
+            var buff = System.Text.Encoding.ASCII.GetBytes(
+                string.Format($"{entry.Message} (sent {DateTime.Now})")
+            );
+
+            int sent = _udpSender.Send(buff, buff.Length, _options.IPEndPoint);
         }
 
         private void ProcessLogQueue()
         {
-            try
-            {
-                foreach (LogMessageEntry message in _messageQueue.GetConsumingEnumerable())
-                {
-                    WriteMessage(message);
-                }
-            }
-            catch
+            while (!_shutdown)
             {
                 try
                 {
-                    _messageQueue.CompleteAdding();
+                    foreach (LogMessageEntry message in _messageQueue.GetConsumingEnumerable())
+                    {
+                        WriteMessage(message);
+                    }
                 }
-                catch { }
+                catch /* TODO: review catch & eat */ 
+                {
+                    try
+                    {
+                        _messageQueue.CompleteAdding();
+                    }
+                    catch {  /* TODO: review catch & eat */ }
+                }
+                // catch (Exception ) { throw; }  // TODO: REMOVE?
             }
         }
+
 
         #region IDisposable impl
 
         public void Dispose()
         {
             _messageQueue.CompleteAdding();
+            _shutdown = true;
 
             try
             {
                 _outputThread.Join(1500); // with timeout in-case Console is locked by user input
             }
             catch (ThreadStateException) { }
+
+            _udpSender.Dispose();
         }
 
         #endregion IDisposable impl

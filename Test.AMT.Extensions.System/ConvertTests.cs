@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Xunit;
 
 
-namespace SystemTests
+namespace Test.AMT.Extensions.System
 {
     public class ConvertTests
     {
