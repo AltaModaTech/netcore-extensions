@@ -2,7 +2,7 @@ name: .NET Core Builds
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master, dev ]
   pull_request:
     branches: [ dev ]
 
@@ -29,5 +29,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test.Mutant
-      run: dotnet test --no-restore --verbosity normal 
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal ./Test.AMT.Extensions.System/Test.AMT.Extensions.System.csproj
+    # NOTE: does not test /Test.AMT.Extensions.Logging at GitHub b/c fails w/IP port comms.
