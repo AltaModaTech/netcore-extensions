@@ -2,7 +2,7 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master, dev, strategy-matrix ]
   pull_request:
     branches: [ master ]
 
@@ -12,15 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet: ['2.1.811', '3.1.403']
-    name: Build and test for .NETCore ${{ matrix.dotnet }}
+        dotnet-sdk: ['2.1.811', '3.1.403']
+    name: Build and test for .NETCore ${{ matrix.dotnet-sdk }}
     
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet }}
+        dotnet-version: ${{ matrix.dotnet-sdk }}
     - name: Install dependencies
       run: dotnet restore
     - name: Build
