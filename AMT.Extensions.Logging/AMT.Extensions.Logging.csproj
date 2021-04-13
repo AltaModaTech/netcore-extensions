@@ -3,10 +3,6 @@
   <Import Project="../common.prod.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <!-- Assembly properties -->
     <Product>AMT.Extensions.Logging</Product>
     <Description>AltaModa Technologies .NET Extensions</Description>
