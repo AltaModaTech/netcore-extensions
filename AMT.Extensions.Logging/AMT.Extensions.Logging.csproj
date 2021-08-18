@@ -9,7 +9,7 @@
     <AssemblyName>AMT.Extensions.Logging</AssemblyName>
     <AssemblyTitle>AltaModa Technologies' extensions to .NET Logging </AssemblyTitle>
     <!-- NuGet package properties -->
-    <PackageId>AMT.Extensions.System</PackageId>
+    <PackageId>AMT.Extensions.Logging</PackageId>
   </PropertyGroup>
 
 </Project>
