@@ -2,7 +2,7 @@
 
     <!-- Company, copyright -->
     <PropertyGroup>
-        <Copyright>AltaModa Technologies 2021</Copyright>
+        <Copyright>AltaModa Technologies, LLC</Copyright>
         <Company>AltaModa Technologies</Company>
         <Authors>@jburnett</Authors>
     </PropertyGroup>
@@ -13,7 +13,8 @@
         <!-- Associate test assemblies with AltaModa Extensions -->
         <Product>AltaModa .NET Extensions</Product>
     
-        <VersionPrefix>2.0.0</VersionPrefix>
+        <VersionPrefix>2.1.0</VersionPrefix>
+
 
         <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
         <GenerateAssemblyCompanyAttribute>true</GenerateAssemblyCompanyAttribute>
@@ -22,7 +23,7 @@
 
      <!-- Packages used by all  -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.*" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.*" />
     </ItemGroup>
 
 </Project>
