@@ -13,7 +13,8 @@
         <!-- Associate test assemblies with AltaModa Extensions -->
         <Product>AltaModa .NET Extensions</Product>
     
-        <VersionPrefix>1.1.0</VersionPrefix>
+        <VersionPrefix>2.1.0</VersionPrefix>
+
 
         <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
         <GenerateAssemblyCompanyAttribute>true</GenerateAssemblyCompanyAttribute>
