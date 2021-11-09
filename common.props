@@ -23,7 +23,7 @@
 
      <!-- Packages used by all  -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.*" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.*" />
     </ItemGroup>
 
 </Project>
