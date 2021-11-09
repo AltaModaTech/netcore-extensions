@@ -13,7 +13,7 @@
         <!-- Associate test assemblies with AltaModa Extensions -->
         <Product>AltaModa .NET Extensions</Product>
     
-        <VersionPrefix>2.1.0</VersionPrefix>
+        <VersionPrefix>2.2.0</VersionPrefix>
 
 
         <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
@@ -23,7 +23,7 @@
 
      <!-- Packages used by all  -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.*" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="*" />
     </ItemGroup>
 
 </Project>
