@@ -3,12 +3,6 @@
   <Import Project="./common.props" />
 
 
-  <!-- Target frameworks  -->
-  <PropertyGroup>
-      <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-  </PropertyGroup>
-
-
   <!-- Packages for test support  -->
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />

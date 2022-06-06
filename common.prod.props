@@ -3,17 +3,13 @@
   <Import Project="./common.props" />
 
 
-  <!-- Target frameworks  -->
-  <PropertyGroup>
-      <TargetFrameworks>netstandard2.1;net5.0;net6.0</TargetFrameworks>
-  </PropertyGroup>
-
-
   <!-- NuGet package attributes  -->
   <PropertyGroup>
     <PackageTags>core;extensions;base64url;logging</PackageTags>
     <PackageProjectUrl>https://github.com/AltaModaTech/netcore-extensions</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Description>A few LINQ Extensions we find useful.</Description>
+    <PackageReleaseNotes>Supports .NET 6.0</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
