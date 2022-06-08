@@ -114,6 +114,9 @@ lcov*.info
 coverage*.json
 coverage*.info
 
+# ReportGenerator outputs
+CoverageReport/**
+
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
