@@ -15,10 +15,11 @@ build:
 	dotnet build
 
 report:
-	@echo "Profile is $(HOME)."
-	dotnet $(HOME)/.nuget/packages/reportgenerator/5.1.9/tools/net6.0/ReportGenerator.dll  "-reports:**/coverage.net6.0.info" "-targetdir:CoverageReport"
+	# @echo "Profile is $(HOME)."
+	# dotnet reportgenerator  "-reports:**/coverage.net6.0.info" "-targetdir:Coverage"
+	reportgenerator "-reports:**/coverage.net6.0.info" "-targetdir:Coverage"
+#	dotnet $(HOME)/.nuget/packages/reportgenerator/5.1.9/tools/net6.0/ReportGenerator.dll  "-reports:**/coverage.net6.0.info" "-targetdir:Coverage"
 
-#	reportgenerator "-reports:**/coverage.net6.0.info" "-targetdir:CoverageReport"
 
 clean:
 	dotnet clean

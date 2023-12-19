@@ -115,7 +115,7 @@ coverage*.json
 coverage*.info
 
 # ReportGenerator outputs
-CoverageReport/**
+Coverage/**
 
 # NCrunch
 _NCrunch_*
