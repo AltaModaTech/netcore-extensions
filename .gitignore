@@ -113,6 +113,7 @@ _TeamCity*
 lcov*.info
 coverage*.json
 coverage*.info
+coverage*.xml
 
 # ReportGenerator outputs
 Coverage/**
