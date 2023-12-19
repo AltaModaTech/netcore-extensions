@@ -7,18 +7,15 @@ test: build
 
 
 cover: build
-	dotnet test /p:CollectCoverage=true ./Test.AMT.Extensions.Logging
-	dotnet test /p:CollectCoverage=true ./Test.AMT.Extensions.System
+	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover\" ./Test.AMT.Extensions.Logging
+	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover\" ./Test.AMT.Extensions.System
 
 
 build: 
 	dotnet build
 
 report:
-	# @echo "Profile is $(HOME)."
-	# dotnet reportgenerator  "-reports:**/coverage.net6.0.info" "-targetdir:Coverage"
-	reportgenerator "-reports:**/coverage.net6.0.info" "-targetdir:Coverage"
-#	dotnet $(HOME)/.nuget/packages/reportgenerator/5.1.9/tools/net6.0/ReportGenerator.dll  "-reports:**/coverage.net6.0.info" "-targetdir:Coverage"
+	dotnet reportgenerator  "-reports:**/coverage.net6.0.opencover.xml" "-targetdir:Coverage"
 
 
 clean:
@@ -28,3 +25,9 @@ clean:
 clean-all: clean
 	@echo "### Remove all NuPkg files"
 	find . -iname "*.nupkg" -exec rm {} \;
+	@echo "### Remove code coverage report"
+	rm -fr ./Coverage
+	@echo "### Remove bin and obj dirs"
+	find . -type d -name "bin" -exec rm -r {} \;
+	find . -type d -name "obj" -exec rm -r {} \;
+	

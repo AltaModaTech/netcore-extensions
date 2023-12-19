@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <!-- References to test targets -->
-    <PackageReference Include="ReportGenerator" Version="5.1.*" />
     <ProjectReference Include="..\AMT.Extensions.Logging\AMT.Extensions.Logging.csproj" />
 
     <!-- XUnit abstrations for ITestOutputHelper -->
