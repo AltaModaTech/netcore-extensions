@@ -2,13 +2,14 @@ using Ext = AMT.Extensions.Logging.IP;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
-using Xunit.Abstractions;
 
 
 namespace Test.AMT.Extensions.Logging.IP
 {
+    [ExcludeFromCodeCoverage]
     public class UdpLoggerTests
     {
 
@@ -121,9 +122,9 @@ namespace Test.AMT.Extensions.Logging.IP
 
 
         #region ITestOutputHelper
-        private readonly ITestOutputHelper testLog;
+        private readonly Xunit.Abstractions.ITestOutputHelper testLog;
 
-        public UdpLoggerTests(ITestOutputHelper outputHelper)
+        public UdpLoggerTests(Xunit.Abstractions.ITestOutputHelper outputHelper)
         {
             this.testLog = outputHelper;
 

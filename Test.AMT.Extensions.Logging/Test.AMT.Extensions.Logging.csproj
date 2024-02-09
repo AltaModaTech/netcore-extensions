@@ -6,9 +6,12 @@
     <AssemblyName>Test.AMT.Extensions.Logging</AssemblyName>
   </PropertyGroup>
 
-  <!-- References to test targets -->
   <ItemGroup>
+    <!-- References to test targets -->
     <ProjectReference Include="..\AMT.Extensions.Logging\AMT.Extensions.Logging.csproj" />
+
+    <!-- XUnit abstrations for ITestOutputHelper -->
+    <PackageReference Include="xunit.abstractions" Version="2.*" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Ext = AMT.Extensions.Logging.IP;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Sockets;
 
 
@@ -12,6 +13,7 @@ namespace Test.AMT.Extensions.Logging.IP
     using System.Collections.Generic;
     using System.Net;
 
+    [ExcludeFromCodeCoverage]
     internal class UdpReceiver : IDisposable
     {
         private static int _maxQueuedMessages = 1024;

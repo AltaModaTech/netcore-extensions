@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/AltaModaTech/netcore-extensions</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Description>A few LINQ Extensions we find useful.</Description>
-    <PackageReleaseNotes>Supports .NET 6.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Includes LabeledCollection</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
