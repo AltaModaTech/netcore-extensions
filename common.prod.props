@@ -10,11 +10,11 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>A few LINQ Extensions we find useful.</Description>
-    <PackageReleaseNotes>Includes LabeledCollection</PackageReleaseNotes>
+    <PackageReleaseNotes>Includes LabeledCollection; README for each package</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-      <None Include="../README.md" Pack="true" PackagePath="/"/>
+      <None Include="./README.md" Pack="true" PackagePath="/"/>
   </ItemGroup>
 
 </Project>
