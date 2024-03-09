@@ -40,6 +40,23 @@ namespace Test.AMT.Extensions.System.Collections.Generic
             c.IsReadOnly.Should().BeFalse();
         }
 
+
+        [Fact]
+        public void allows_duplicate_labels()
+        {
+            var c = new Ext.LabeledCollection<string,string>();
+
+            for (int i=0; i<2; ++i)
+            {
+                foreach (var kvp in _validKvps)
+                {
+                    c.Add(kvp);
+                }
+            }
+            c.Count.Should().Be(_validKvps.Count*2);
+        }
+
+
         [Fact]
         public void can_add_and_remove_kvp_as_ICollection()
         {

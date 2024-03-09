@@ -1,12 +1,14 @@
 // Copyright (c) AltaModa Technologies. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 
 namespace AMT.Extensions.System.Collections.Generic
 {
+    [Obsolete("Use List<KeyValuePair<>>")]
     public class LabeledCollection<TLabel, TContent> : ILabeledCollection<TLabel, TContent>
     {
 
