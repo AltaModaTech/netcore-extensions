@@ -1,5 +1,6 @@
 param (
-    [Parameter(Mandatory=$true)][string]$apiKey
+    [Parameter(Mandatory=$true)][string]$apiKey,
+    [Parameter(Mandatory=$false)][bool]$RemovePrevNuPkg = $true
 )
 
 $branch = invoke-expression "git branch --show-current"
@@ -13,6 +14,14 @@ $projPaths = @(
     "./AMT.Extensions.Logging",
     "./AMT.Extensions.System"
 )
+
+if ($RemovePrevNuPkg) {
+    Write-Verbose "Removing previous NuPkg files"
+    $projPaths | %{
+        write-host ""   # separator
+        Remove-Item $_/bin/Release/*.nupkg
+    }
+}
 
 # Ensure everything is built
 Write-Verbose "Pack projects"

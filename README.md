@@ -1,7 +1,4 @@
 # netcore-extensions
 
-## AMT.Extensions.System
-Extensions for .NET's System namespace
-
-* Convert.ToBase64Url - encodes using base64url
-* Convert.FromBase64Url - decodes from base64url
+* [AMT.Extensions.Logging](AMT.Extensions.Logging/README.md)
+* [AMT.Extensions.System](AMT.Extensions.System/README.md)

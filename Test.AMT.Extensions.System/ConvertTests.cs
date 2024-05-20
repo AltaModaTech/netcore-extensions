@@ -1,4 +1,7 @@
-﻿using Ext = AMT.Extensions.System;
+﻿// Copyright (c) AltaModa Technologies. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+
+using Ext = AMT.Extensions.System;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;

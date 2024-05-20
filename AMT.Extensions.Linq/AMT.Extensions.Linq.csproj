@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../common.prod.props" />
+
+  <PropertyGroup>
+    <!-- Assembly properties -->
+    <Product>AMT.Extensions.Linq</Product>
+    <Description>AltaModa Technologies .NET Extensions</Description>
+    <AssemblyName>AMT.Extensions.Linq</AssemblyName>
+    <AssemblyTitle>AltaModa Technologies' extensions to .NET Linq</AssemblyTitle>
+    <!-- NuGet package properties -->
+    <PackageId>AMT.Extensions.Linq</PackageId>
+  </PropertyGroup>
+
+</Project>
