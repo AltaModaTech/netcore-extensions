@@ -2,14 +2,13 @@
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 
 namespace Test.AMT.Extensions.Linq
 {
-    // TODO: include when doing code coverage
-    // [ExcludeFromCodeCoverage]
-
+    [ExcludeFromCodeCoverage]
 	public class IntListRandomizerTests : IClassFixture<IntListTestFixture>
 	{
 		IntListTestFixture _testData;

@@ -16,7 +16,7 @@ cover: build
 build: 
 	dotnet build
 
-report:
+cover-report:
 	dotnet reportgenerator  "-reports:**/coverage.net6.0.opencover.xml" "-targetdir:Coverage"
 
 
