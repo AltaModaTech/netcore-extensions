@@ -2,11 +2,13 @@ all: test
 
 
 test: build
+	dotnet test ./Test.AMT.Extensions.Linq
 	dotnet test ./Test.AMT.Extensions.Logging
 	dotnet test ./Test.AMT.Extensions.System
 
 
 cover: build
+	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover\" ./Test.AMT.Extensions.Linq
 	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover\" ./Test.AMT.Extensions.Logging
 	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover\" ./Test.AMT.Extensions.System
 

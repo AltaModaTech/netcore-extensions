@@ -5,12 +5,11 @@
 
   <!-- NuGet package attributes  -->
   <PropertyGroup>
-    <PackageTags>.NET;extensions;base64url;logging</PackageTags>
+    <PackageTags>core;extensions;base64url;logging;linq</PackageTags>
     <PackageProjectUrl>https://github.com/AltaModaTech/netcore-extensions</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Description>A few Extensions to .NET's System namespace we find useful.</Description>
-    <PackageReleaseNotes>Deprecates labeled collections</PackageReleaseNotes>
+    <Description>.NET Extensions we find useful.</Description>
+    <PackageReleaseNotes>Includes Linq extensions</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
