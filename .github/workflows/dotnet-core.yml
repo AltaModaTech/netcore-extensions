@@ -2,7 +2,9 @@ name: .NET Core Builds
 
 on:
   push:
-    branches: [ dev ]
+    branches:
+      - '**'        # match all branches, including with '/'
+      - '!master'   # except master
   pull_request:
     branches: [ master ]
 
