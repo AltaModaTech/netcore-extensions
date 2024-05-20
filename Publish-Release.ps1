@@ -11,6 +11,7 @@ if ($branch -ne 'master') {
 }
 
 $projPaths = @(
+    "./AMT.Extensions.Linq",
     "./AMT.Extensions.Logging",
     "./AMT.Extensions.System"
 )
