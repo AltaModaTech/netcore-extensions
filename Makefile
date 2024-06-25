@@ -31,6 +31,6 @@ clean-all: clean
 	@echo "### Remove code coverage report"
 	rm -fr ./Coverage
 	@echo "### Remove bin and obj dirs"
-	find . -type d -name "bin" -exec rm -r {} \;
-	find . -type d -name "obj" -exec rm -r {} \;
+	find . -type d -name "bin" -prune -exec rm -r {} \;
+	find . -type d -name "obj" -prune -exec rm -r {} \;
 	
