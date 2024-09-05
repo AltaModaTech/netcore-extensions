@@ -2,6 +2,10 @@
 
   <Import Project="./common.props" />
 
+  <!-- Target frameworks  -->
+  <PropertyGroup>
+      <TargetFrameworks>netstandard2.1</TargetFrameworks>
+  </PropertyGroup>
 
   <!-- NuGet package attributes  -->
   <PropertyGroup>
