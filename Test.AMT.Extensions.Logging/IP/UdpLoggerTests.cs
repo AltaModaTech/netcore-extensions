@@ -30,18 +30,19 @@ namespace Test.AMT.Extensions.Logging.IP
                 _provider = new Ext.UdpLoggerProvider(opts);
                 var logger = _provider.CreateLogger("test") as Ext.UdpLogger;
 
+                // Log a message of each LogLevel
                 foreach (int level in _logLevels)
                 {
-                    // Log some messages
                     logger.Log((LogLevel)level, DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
                 }
 
-                // Brief wait & stop listener
+                // Brief wait, then stop listener
                 System.Threading.Thread.Sleep(100);
                 _receiver.Stop();
 
                 // NOTE: RetrieveMessages returns a _consuming_ enumerator, so it can only be used once.
-                _receiver.RetrieveMessages().Count().Should().Be(_logLevels.Length - 1);  // -1 since None shouldn't be logged
+                //  2024.09.17, JB: previously None was filtered, but it seems that changed in logging fx.
+                _receiver.RetrieveMessages().Count().Should().Be(_logLevels.Length);
             }
         }
 
