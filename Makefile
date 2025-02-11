@@ -18,7 +18,7 @@ cover: build
 
 
 cover-report:
-	dotnet reportgenerator  "-reports:**/coverage.net8.0.opencover.xml" "-targetdir:Coverage"
+	dotnet reportgenerator  "-reports:**/coverage.net9.0.opencover.xml" "-targetdir:Coverage"
 
 
 clean:

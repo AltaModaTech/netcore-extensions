@@ -14,7 +14,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>A few Extensions to .NET's System namespace we find useful.</Description>
-    <PackageReleaseNotes>Include Linq extensions</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgrade to net9.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
