@@ -18,14 +18,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Setup .NET 8.0
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET 9.0
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.*
+        dotnet-version: 9.0.*
     - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration ${{ matrix.build-config }} --no-restore
     - name: Test
-      run: dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.System/Test.AMT.Extensions.System.csproj
+      run: |
+        dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.System/Test.AMT.Extensions.System.csproj
+        dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.Linq/Test.AMT.Extensions.Linq.csproj
     # NOTE: does not test /Test.AMT.Extensions.Logging at GitHub b/c fails w/IP port comms.
