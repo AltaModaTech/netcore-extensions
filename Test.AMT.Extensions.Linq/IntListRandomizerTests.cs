@@ -32,11 +32,11 @@ namespace Test.AMT.Extensions.Linq
 			{
 				// Test via the method taking ICollection
 				int curr = _testData.TestList.Random();
-				curr.Should().BeGreaterOrEqualTo(IntListTestFixture.MinTestValue);
+				curr.Should().BeGreaterThanOrEqualTo(IntListTestFixture.MinTestValue);
 
 				// Test via the method taking IEnumerable
 				curr = enr.Random();
-				curr.Should().BeGreaterOrEqualTo(IntListTestFixture.MinTestValue);
+				curr.Should().BeGreaterThanOrEqualTo(IntListTestFixture.MinTestValue);
 			}
 		}
 
@@ -75,12 +75,12 @@ namespace Test.AMT.Extensions.Linq
 			{
 				// Test via the method taking ICollection
 				var curr = dict.Random();
-				curr.Key.Should().BeGreaterOrEqualTo(IntListTestFixture.MinTestValue);
+				curr.Key.Should().BeGreaterThanOrEqualTo(IntListTestFixture.MinTestValue);
 				curr.Value.Should().BeEquivalentTo(curr.Key.ToString());
 
 				// Test via the method taking IEnumerable
 				curr = enr.Random();
-				curr.Key.Should().BeGreaterOrEqualTo(IntListTestFixture.MinTestValue);
+				curr.Key.Should().BeGreaterThanOrEqualTo(IntListTestFixture.MinTestValue);
 				curr.Value.Should().BeEquivalentTo(curr.Key.ToString());
 			}
 		}
@@ -98,12 +98,12 @@ namespace Test.AMT.Extensions.Linq
 			{
 				// Test via the method taking ICollection
 				var curr = list.Random();
-				curr.Key.Should().BeGreaterOrEqualTo(IntListTestFixture.MinTestValue);
+				curr.Key.Should().BeGreaterThanOrEqualTo(IntListTestFixture.MinTestValue);
 				curr.Value.Should().BeEquivalentTo(curr.Key.ToString());
 
 				// Test via the method taking IEnumerable
 				curr = enr.Random();
-				curr.Key.Should().BeGreaterOrEqualTo(IntListTestFixture.MinTestValue);
+				curr.Key.Should().BeGreaterThanOrEqualTo(IntListTestFixture.MinTestValue);
 				curr.Value.Should().BeEquivalentTo(curr.Key.ToString());
 			}
 		}
