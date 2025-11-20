@@ -8,6 +8,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
+using System.Net;
+using System.Runtime.CompilerServices;
 
 
 namespace Test.AMT.Extensions.Logging.IP
@@ -19,30 +21,31 @@ namespace Test.AMT.Extensions.Logging.IP
         [Fact]
         public void verify_each_loglevel()
         {
-            // Prepare listener to receive messages
-            var opts = new Ext.UdpLoggerOptions();
+            // Prepare listener to receive messages; isolate port for message count
+            var opts = new Ext.UdpLoggerOptions(new IPEndPoint(IPAddress.Loopback, 17460));
 
             using (_receiver = new UdpReceiver())
             {
                 _receiver.Start(opts);
 
                 // Add options to provider before create logger
-                _provider = new Ext.UdpLoggerProvider(opts);
-                var logger = _provider.CreateLogger("test") as Ext.UdpLogger;
+                using (_provider = new Ext.UdpLoggerProvider(opts)) {
+                    _logger = _provider.CreateLogger("test") as Ext.UdpLogger;
 
-                // Log a message of each LogLevel
-                foreach (int level in _logLevels)
-                {
-                    logger.Log((LogLevel)level, DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
+                    // Log a message of each LogLevel
+                    foreach (int level in _logLevels)
+                    {
+                        _logger.Log((LogLevel)level, DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
+                    }
+
+                    // Brief wait, then stop listener
+                    System.Threading.Thread.Sleep(100);
+                    _receiver.Stop();
+
+                    // NOTE: RetrieveMessages returns a _consuming_ enumerator, so it can only be used once.
+                    //  LogLevel.None filtered, so reduce by 1.
+                    _receiver.RetrieveMessages().Count().Should().Be(_logLevels.Length - 1);
                 }
-
-                // Brief wait, then stop listener
-                System.Threading.Thread.Sleep(100);
-                _receiver.Stop();
-
-                // NOTE: RetrieveMessages returns a _consuming_ enumerator, so it can only be used once.
-                //  2024.09.17, JB: previously None was filtered, but it seems that changed in logging fx.
-                _receiver.RetrieveMessages().Count().Should().Be(_logLevels.Length);
             }
         }
 
@@ -119,6 +122,36 @@ namespace Test.AMT.Extensions.Logging.IP
         }
 
 
+        [Fact]
+        public void verify_begin_scope()
+        {
+            // Prepare listener to receive messages
+            var opts = new Ext.UdpLoggerOptions();
+
+            using (_receiver = new UdpReceiver())
+            {
+                _receiver.Start(opts);
+
+                // Add options to provider before create logger
+                using (_provider = new Ext.UdpLoggerProvider(opts)) {
+                    _logger = _provider.CreateLogger("test") as Ext.UdpLogger;
+
+                    using (_logger.BeginScope("SCOPE L1: ", null))
+                    {
+                        _logger.Log(LogLevel.Trace, "some log message");
+                        using (_logger.BeginScope("SCOPE L2: ", null))
+                        {
+                            _logger.Log(LogLevel.Trace, "some log message");
+                        }
+
+                        // TODO: confirm scope messages?
+                    }
+
+                }
+            }
+        }
+
+
         private LogLevel GetRandomLogLevel(bool excludeNone = true)
         {
             return (LogLevel)_randomizer.Next(0, excludeNone ? _logLevels.Length - 1 : _logLevels.Length);
@@ -139,6 +172,7 @@ namespace Test.AMT.Extensions.Logging.IP
 
 
         private ILoggerProvider _provider;
+        private ILogger _logger;
         private UdpReceiver _receiver;
         private readonly object DEFAULT_STATE = "### Default state for testing ###";
         private readonly object NULL_STATE = "[null-state]"; // TODO: use null;

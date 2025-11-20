@@ -49,11 +49,7 @@ namespace AMT.Extensions.Logging.IP
             }
 
             // Adding is completed so just log the message
-            try
-            {
-                WriteMessage(message);
-            }
-            catch (Exception) { }
+            WriteMessage(message);
         }
 
         internal virtual void WriteMessage(LogMessageEntry entry)
@@ -96,13 +92,17 @@ namespace AMT.Extensions.Logging.IP
             _messageQueue.CompleteAdding();
             _shutdown = true;
 
+            // Give the sender time to complete its tasks
             try
             {
+                // TODO: use a config value for timeout
                 _outputThread.Join(1500); // with timeout in-case Console is locked by user input
             }
             catch (ThreadStateException) { }
 
             _udpSender.Dispose();
+            // Clear any messages
+            _messageQueue.Dispose();
         }
 
         #endregion IDisposable impl

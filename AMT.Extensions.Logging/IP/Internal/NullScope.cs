@@ -5,12 +5,14 @@
 //  due to it being internal access there.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AMT.Extensions.Logging.IP
 {
     /// <summary>
     /// An empty scope without any logic
     /// </summary>
+    [ExcludeFromCodeCoverage]
     internal class NullScope : IDisposable
     {
         public static NullScope Instance { get; } = new NullScope();
