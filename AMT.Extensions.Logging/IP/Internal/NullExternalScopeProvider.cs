@@ -6,13 +6,15 @@
 
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AMT.Extensions.Logging.IP
 {
     /// <summary>
     /// Scope provider that does nothing.
     /// </summary>
-    internal class NullExternalScopeProvider : IExternalScopeProvider
+    [ExcludeFromCodeCoverage]
+    public class NullExternalScopeProvider : IExternalScopeProvider
     {
         private NullExternalScopeProvider()
         {

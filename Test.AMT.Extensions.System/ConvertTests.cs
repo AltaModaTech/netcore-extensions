@@ -67,6 +67,14 @@ namespace Test.AMT.Extensions.System
             };
 
             act.Should().Throw<ArgumentNullException>();
+
+
+            // Verify proper exception when encoded is null
+            act = () => {
+                Ext.Convert.FromBase64UrlString(null);
+            };
+
+            act.Should().Throw<ArgumentNullException>();
         }
 
 
@@ -76,6 +84,14 @@ namespace Test.AMT.Extensions.System
             // Verify proper exception when string is empty
             Action act = () => {
                 Ext.Convert.ToBase64UrlString(string.Empty);
+            };
+
+            act.Should().Throw<ArgumentOutOfRangeException>();
+
+
+            // Verify proper exception when encoded is empty
+            act = () => {
+                Ext.Convert.FromBase64UrlString(string.Empty);
             };
 
             act.Should().Throw<ArgumentOutOfRangeException>();

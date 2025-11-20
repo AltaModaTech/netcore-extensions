@@ -37,7 +37,13 @@ namespace AMT.Extensions.Logging.IP
 
         public void SetScopeProvider(IExternalScopeProvider scopeProvider)
         {
-            _scopeProvider = scopeProvider;
+            if (null == scopeProvider)
+            {
+                _scopeProvider = NullExternalScopeProvider.Instance;
+            } else
+            {
+                _scopeProvider = scopeProvider;           
+            }
         }
 
         #endregion ISupportExternalScope impl
