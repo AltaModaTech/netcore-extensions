@@ -20,7 +20,7 @@ if ($RemovePrevNuPkg) {
     Write-Verbose "Removing previous NuPkg files"
     $projPaths | %{
         write-host ""   # separator
-        Remove-Item $_/bin/Release/*.nupkg
+        Remove-Item $_/bin/Release/*.nupkg -ErrorAction SilentlyContinue
     }
 }
 
