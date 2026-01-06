@@ -4,7 +4,7 @@
 
   <!-- Target frameworks  -->
   <PropertyGroup>
-      <TargetFrameworks>net9.0</TargetFrameworks>
+      <TargetFrameworks>net10.0</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Packages for test support  -->
