@@ -28,6 +28,7 @@ jobs:
       run: dotnet build --configuration ${{ matrix.build-config }} --no-restore
     - name: Test
       run: |
-        dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.System/Test.AMT.Extensions.System.csproj
         dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.Linq/Test.AMT.Extensions.Linq.csproj
+        dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.System/Test.AMT.Extensions.System.csproj
+        dotnet test --configuration ${{ matrix.build-config }} --no-restore --verbosity normal ./Test.AMT.Extensions.System.IO/Test.AMT.Extensions.System.IO.csproj
     # NOTE: does not test /Test.AMT.Extensions.Logging at GitHub b/c fails w/IP port comms.
