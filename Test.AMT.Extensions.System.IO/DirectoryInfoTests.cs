@@ -29,7 +29,7 @@ namespace Test.AMT.Extensions.System.IO
                 ExcludeByPattern = new List<string>()
             };
 
-            var di = new DirectoryInfo("/Users/jb/src/github.com");
+            var di = new DirectoryInfo("~");
             var found = di.Find(opts);
 
             found.Count().Should().BeGreaterThan(0);
@@ -49,7 +49,7 @@ namespace Test.AMT.Extensions.System.IO
                 ExcludeByPattern = new List<string>()
             };
 
-            var beginDir = new DirectoryInfo("/Users/jb/src/github.com");
+            var beginDir = new DirectoryInfo("~");
             foreach (DirectoryInfo di in beginDir.EnumerateDirectories(opts))
             {
                 foreach (var p2e in pathsToExclude)
