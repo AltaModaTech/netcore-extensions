@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../common.test.props" />
+
+  <PropertyGroup>
+    <AssemblyName>Test.AMT.Extensions.System.IO</AssemblyName>
+  </PropertyGroup>
+
+  <!-- References to test targets -->
+  <ItemGroup>
+    <ProjectReference Include="..\AMT.Extensions.System.IO\AMT.Extensions.System.IO.csproj" />
+  </ItemGroup>
+
+</Project>
