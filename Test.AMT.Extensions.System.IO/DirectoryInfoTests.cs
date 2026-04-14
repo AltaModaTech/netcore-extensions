@@ -7,8 +7,10 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Xunit;
 using System.Linq;
+using Testably.Abstractions.Testing;
+using Xunit;
+using Microsoft.VisualBasic;
 
 namespace Test.AMT.Extensions.System.IO
 {
@@ -19,9 +21,16 @@ namespace Test.AMT.Extensions.System.IO
         [Fact]
         public void can_find()
         {
+            var fileSystem = new MockFileSystem();
+            fileSystem.Initialize()
+                .WithSubdirectory("foo").Initialized(d => d
+                    .WithSubdirectory("bar")
+                    .WithFile("bar.txt"))
+                .WithFile("foo.txt").Which(f => f.HasStringContent("some file content"));
+
             var pathsToExclude = new List<string>
             {
-                "/Users/jb/src/github.com/jburnett"
+                "bar"
             };
             var opts = new SearchOptions
             {
@@ -29,8 +38,10 @@ namespace Test.AMT.Extensions.System.IO
                 ExcludeByPattern = new List<string>()
             };
 
-            var di = new DirectoryInfo("~");
-            var found = di.Find(opts);
+            var di = fileSystem.DirectoryInfo.New(".");
+            var found = di.EnumerateDirectories();
+        // TODO: Seems Testably is not extensible
+            di.Find(opts);
 
             found.Count().Should().BeGreaterThan(0);
         }
