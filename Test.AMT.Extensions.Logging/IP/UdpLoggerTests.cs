@@ -79,7 +79,7 @@ namespace Test.AMT.Extensions.Logging.IP
                 _receiver.Stop();
 
                 // NOTE: RetrieveMessages returns a _consuming_ enumerator, so it can only be used once.
-                _receiver.RetrieveMessages().Count().Should().Be(4);  // -1 since None shouldn't be logged
+                _receiver.RetrieveMessages().Count().Should().Be(4);
             }
         }
 
