@@ -64,11 +64,12 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: nuget-packages
-          path: artifacts/*.nupkg
+          path: artifacts
 
-      - name: Check package versions match the tag
+      - name: Verify the package versions match the tag
         run: |
           version="${GITHUB_REF_NAME#v}"
+          echo "version: $version"
           for package in artifacts/*.nupkg; do
             case "$package" in
               *".$version.nupkg") ;;
