@@ -5,7 +5,6 @@ using Ext = AMT.Extensions.Logging.IP;
 using FluentAssertions;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Xunit;
 
 
 namespace Test.AMT.Extensions.Logging.IP

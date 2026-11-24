@@ -7,9 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Xunit;
 using System.Net;
-using System.Runtime.CompilerServices;
 
 
 namespace Test.AMT.Extensions.Logging.IP
@@ -33,18 +31,18 @@ namespace Test.AMT.Extensions.Logging.IP
                     _logger = _provider.CreateLogger("test") as Ext.UdpLogger;
 
                     // Log a message of each LogLevel
-                    foreach (int level in _logLevels)
+                    foreach (int level in _logLevelValues)
                     {
                         _logger.Log((LogLevel)level, DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
                     }
 
                     // Brief wait, then stop listener
-                    System.Threading.Thread.Sleep(100);
+                    DoSleep();
                     _receiver.Stop();
 
                     // NOTE: RetrieveMessages returns a _consuming_ enumerator, so it can only be used once.
                     //  LogLevel.None filtered, so reduce by 1.
-                    _receiver.RetrieveMessages().Count().Should().Be(_logLevels.Length - 1);
+                    _receiver.RetrieveMessages().Count().Should().Be(_logLevelValues.Length - 1);
                 }
             }
         }
@@ -56,13 +54,13 @@ namespace Test.AMT.Extensions.Logging.IP
             // Prepare listener to receive messages
             var opts = new Ext.UdpLoggerOptions();
 
+            // Add options to provider before create logger
+            _provider = new Ext.UdpLoggerProvider(opts);
+            var logger = _provider.CreateLogger("test") as Ext.UdpLogger;
+
             using (_receiver = new UdpReceiver())
             {
                 _receiver.Start(opts);
-
-                // Add options to provider before create logger
-                _provider = new Ext.UdpLoggerProvider(opts);
-                var logger = _provider.CreateLogger("test") as Ext.UdpLogger;
 
                 // Log non-null data
                 logger.Log(GetRandomLogLevel(), DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
@@ -75,7 +73,7 @@ namespace Test.AMT.Extensions.Logging.IP
                 logger.Log(GetRandomLogLevel(), DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
                 
                 // Brief wait & stop listener
-                System.Threading.Thread.Sleep(100);
+                DoSleep();
                 _receiver.Stop();
 
                 // NOTE: RetrieveMessages returns a _consuming_ enumerator, so it can only be used once.
@@ -91,13 +89,13 @@ namespace Test.AMT.Extensions.Logging.IP
             var opts = new Ext.UdpLoggerOptions();
             _outputHelper.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
 
+            // Add options to provider before create logger
+            _provider = new Ext.UdpLoggerProvider(opts);
+            var logger = _provider.CreateLogger("test") as Ext.UdpLogger;
+
             using (_receiver = new UdpReceiver())
             {
                 _receiver.Start(opts);
-
-                // Add options to provider before create logger
-                _provider = new Ext.UdpLoggerProvider(opts);
-                var logger = _provider.CreateLogger("test") as Ext.UdpLogger;
 
                 // Log some messages
                 logger.Log(LogLevel.Debug, DEFAULT_EVENTID, DEFAULT_STATE, DEFAULT_EXCEPTION, setStringFormatter);
@@ -107,7 +105,7 @@ namespace Test.AMT.Extensions.Logging.IP
                 logger.Log(LogLevel.None, DEFAULT_EVENTID, DEFAULT_STATE, NULL_EXCEPTION, setStringFormatter);
 
                 // Brief wait & stop listener
-                System.Threading.Thread.Sleep(100);
+                DoSleep();
                 _receiver.Stop();
 
 
@@ -154,9 +152,15 @@ namespace Test.AMT.Extensions.Logging.IP
 
         private LogLevel GetRandomLogLevel(bool excludeNone = true)
         {
-            return (LogLevel)_randomizer.Next(0, excludeNone ? _logLevels.Length - 1 : _logLevels.Length);
+            LogLevel level = (LogLevel)_randomizer.Next(0, excludeNone ? _logLevelValues.Length - 1 : _logLevelValues.Length);
+            if (excludeNone && level == LogLevel.None) { throw new ApplicationException("GetRandomLogLevel failed to exclude None."); }
+
+            return level;
         }
 
+        // DoSleep to allow for all msgs to be received
+        private int _minReceiverSleep = 250;
+        private void DoSleep() { System.Threading.Thread.Sleep(_minReceiverSleep); }
 
         #region ITestOutputHelper
         private readonly ITestOutputHelper _outputHelper;
@@ -165,7 +169,7 @@ namespace Test.AMT.Extensions.Logging.IP
         {
             _outputHelper = outputHelper;
 
-            _logLevels = Enum.GetValues(typeof(LogLevel));
+            _logLevelValues = Enum.GetValues(typeof(LogLevel));
         }
         #endregion ITestOutputHelper
 
@@ -174,6 +178,7 @@ namespace Test.AMT.Extensions.Logging.IP
         private ILoggerProvider _provider;
         private ILogger _logger;
         private UdpReceiver _receiver;
+
         private readonly object DEFAULT_STATE = "### Default state for testing ###";
         private readonly object NULL_STATE = "[null-state]"; // TODO: use null;
         private readonly Exception DEFAULT_EXCEPTION = new Exception("### Default exception for testing Logging ###");
@@ -181,7 +186,7 @@ namespace Test.AMT.Extensions.Logging.IP
         private readonly EventId DEFAULT_EVENTID = new EventId();
         private readonly Func<object, Exception, string> setStringFormatter = (state, exception) => $"{state}, {exception}";
 
-        private readonly Array _logLevels;
+        private readonly Array _logLevelValues;
         private readonly Random _randomizer = new Random();
     }
 }
