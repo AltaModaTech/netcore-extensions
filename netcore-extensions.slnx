@@ -1,0 +1,19 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="AMT.Extensions.Linq/AMT.Extensions.Linq.csproj" />
+  <Project Path="AMT.Extensions.Logging/AMT.Extensions.Logging.csproj" />
+  <Project Path="AMT.Extensions.System/AMT.Extensions.System.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="Test.AMT.Extensions.Linq/Test.AMT.Extensions.Linq.csproj" />
+  <Project Path="Test.AMT.Extensions.Logging/Test.AMT.Extensions.Logging.csproj" />
+  <Project Path="Test.AMT.Extensions.System/Test.AMT.Extensions.System.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+</Solution>
