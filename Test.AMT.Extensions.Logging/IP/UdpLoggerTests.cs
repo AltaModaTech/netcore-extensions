@@ -89,7 +89,7 @@ namespace Test.AMT.Extensions.Logging.IP
         {
             // Prepare listener to receive messages
             var opts = new Ext.UdpLoggerOptions();
-            testLog.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
+            _outputHelper.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
 
             using (_receiver = new UdpReceiver())
             {
@@ -159,11 +159,11 @@ namespace Test.AMT.Extensions.Logging.IP
 
 
         #region ITestOutputHelper
-        private readonly Xunit.Abstractions.ITestOutputHelper testLog;
+        private readonly ITestOutputHelper _outputHelper;
 
-        public UdpLoggerTests(Xunit.Abstractions.ITestOutputHelper outputHelper)
+        public UdpLoggerTests(ITestOutputHelper outputHelper)
         {
-            this.testLog = outputHelper;
+            _outputHelper = outputHelper;
 
             _logLevels = Enum.GetValues(typeof(LogLevel));
         }

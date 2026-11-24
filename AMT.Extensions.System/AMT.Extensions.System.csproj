@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../common.prod.props" />
-
   <PropertyGroup>
     <!-- Assembly properties -->
     <Product>AMT.Extensions.System</Product>
