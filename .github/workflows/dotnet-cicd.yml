@@ -89,7 +89,14 @@ jobs:
           dotnet-version: 11.0.x
 
       - name: Push NuGet packages
-        run: >
-          dotnet package stage push "artifacts/*.nupkg"
-          --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
-          --source https://api.nuget.org/v3/index.json
+        run: |
+          for package in artifacts/*.nupkg; do
+            dotnet package stage push "$package" \
+              --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+              --source https://api.nuget.org/v3/index.json
+          done
+
+        # run: >
+        #   dotnet package stage push "artifacts/AMT.Extensions.Linq.nupkg"
+        #   --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
+        #   --source https://api.nuget.org/v3/index.json
