@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.6.0",
+      "version": "5.6.1",
       "commands": [
         "reportgenerator"
       ],
@@ -17,7 +17,7 @@
       "rollForward": false
     },
     "coverlet.console": {
-      "version": "10.1.0",
+      "version": "10.1.1",
       "commands": [
         "coverlet"
       ],
