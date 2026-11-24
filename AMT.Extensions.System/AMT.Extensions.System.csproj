@@ -8,6 +8,7 @@
     <AssemblyTitle>AltaModa Technologies' extensions to .NET System</AssemblyTitle>
     <!-- NuGet package properties -->
     <PackageId>AMT.Extensions.System</PackageId>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 </Project>

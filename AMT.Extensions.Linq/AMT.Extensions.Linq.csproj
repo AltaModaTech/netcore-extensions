@@ -8,6 +8,7 @@
     <AssemblyTitle>AltaModa Technologies' extensions to .NET Linq</AssemblyTitle>
     <!-- NuGet package properties -->
     <PackageId>AMT.Extensions.Linq</PackageId>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 </Project>

@@ -8,6 +8,7 @@
     <AssemblyTitle>AltaModa Technologies' extensions to .NET Logging </AssemblyTitle>
     <!-- NuGet package properties -->
     <PackageId>AMT.Extensions.Logging</PackageId>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
