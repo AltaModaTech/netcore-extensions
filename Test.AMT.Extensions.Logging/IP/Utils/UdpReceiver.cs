@@ -24,12 +24,18 @@ namespace Test.AMT.Extensions.Logging.IP
 
         public void Start(Ext.UdpLoggerOptions options)
         {
-            _stopListener = false;
+            // Start with an empty message queue
+            if (_messageQueue != null)
+            {
+                _messageQueue.Dispose();
+            }
+            _messageQueue = new BlockingCollection<string>(_maxQueuedMessages);
 
+            // Create the client to receive messages
             _client = new UdpClient(options.IPEndPoint);
 
-            var senderIP = new IPEndPoint(0,0);
-
+            // Start listening for messages
+            _stopListener = false;
             // Spawn Udp receiver
             System.Threading.Tasks.Task.Run( () => {
 
@@ -72,6 +78,7 @@ namespace Test.AMT.Extensions.Logging.IP
             // Drain the queue
             if (_messageQueue != null)
             {
+                _messageQueue.Dispose();
                 _messageQueue = null;
             }
 

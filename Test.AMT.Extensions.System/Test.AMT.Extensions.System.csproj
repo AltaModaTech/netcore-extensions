@@ -1,14 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../common.test.props" />
-
-  <PropertyGroup>
-    <AssemblyName>Test.AMT.Extensions.System</AssemblyName>
-  </PropertyGroup>
-
-  <!-- References to test targets -->
   <ItemGroup>
     <ProjectReference Include="..\AMT.Extensions.System\AMT.Extensions.System.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

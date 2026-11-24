@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../common.prod.props" />
-
   <PropertyGroup>
     <!-- Assembly properties -->
     <Product>AMT.Extensions.Logging</Product>
@@ -10,6 +8,11 @@
     <AssemblyTitle>AltaModa Technologies' extensions to .NET Logging </AssemblyTitle>
     <!-- NuGet package properties -->
     <PackageId>AMT.Extensions.Logging</PackageId>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
 
 </Project>

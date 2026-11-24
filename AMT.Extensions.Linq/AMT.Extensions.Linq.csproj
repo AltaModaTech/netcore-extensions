@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../common.prod.props" />
-
   <PropertyGroup>
     <!-- Assembly properties -->
     <Product>AMT.Extensions.Linq</Product>
@@ -10,6 +8,7 @@
     <AssemblyTitle>AltaModa Technologies' extensions to .NET Linq</AssemblyTitle>
     <!-- NuGet package properties -->
     <PackageId>AMT.Extensions.Linq</PackageId>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 </Project>

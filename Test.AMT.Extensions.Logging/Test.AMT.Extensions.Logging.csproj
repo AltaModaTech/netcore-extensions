@@ -1,17 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../common.test.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\AMT.Extensions.Logging\AMT.Extensions.Logging.csproj" />
+  </ItemGroup>
 
   <PropertyGroup>
-    <AssemblyName>Test.AMT.Extensions.Logging</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- References to test targets -->
-    <ProjectReference Include="..\AMT.Extensions.Logging\AMT.Extensions.Logging.csproj" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="xunit.abstractions" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
 
-    <!-- XUnit abstrations for ITestOutputHelper -->
-    <PackageReference Include="xunit.abstractions" Version="2.*" />
+  <ItemGroup>
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
