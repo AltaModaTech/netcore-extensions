@@ -44,8 +44,9 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v7
         with:
-          name: packages
-          path: artifacts/
+          name: nuget-packages
+          path: artifacts/*.nupkg
+          retention-days: 2
           if-no-files-found: error
 
   # Publishes the packages built above to nuget.org on v* tags, with a short-lived key from
@@ -62,8 +63,8 @@ jobs:
       - name: Download packages
         uses: actions/download-artifact@v8
         with:
-          name: packages
-          path: artifacts
+          name: nuget-packages
+          path: artifacts/*.nupkg
 
       - name: Check package versions match the tag
         run: |
@@ -81,9 +82,10 @@ jobs:
         with:
           user: ${{ secrets.NUGET_USER }}  # the nuget.org profile name that owns the Trusted Publishing policy
 
+      # Use .NET 11 to get nuget staging support
       - uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: 11.0.x
 
       - name: Push NuGet packages
         run: >
