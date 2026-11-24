@@ -28,17 +28,17 @@ jobs:
           global-json-file: global.json
 
       - name: Restore
-        run: dotnet restore FauxGraph.Datastore.slnx
+        run: dotnet restore netcore-extensions.slnx
 
       - name: Build
-        run: dotnet build FauxGraph.Datastore.slnx --configuration Release --no-restore
+        run: dotnet build netcore-extensions.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --solution FauxGraph.Datastore.slnx --configuration Release --no-build
+        run: dotnet test --solution netcore-extensions.slnx --configuration Release --no-build
 
       - name: Pack
         if: matrix.os == 'ubuntu-latest'
-        run: dotnet pack FauxGraph.Datastore.slnx --configuration Release --no-build --output artifacts
+        run: dotnet pack netcore-extensions.slnx --configuration Release --no-build --output artifacts
 
       - name: Upload packages
         if: matrix.os == 'ubuntu-latest'
