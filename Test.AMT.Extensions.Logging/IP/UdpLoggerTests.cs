@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
+using System.Threading;
 
 
 namespace Test.AMT.Extensions.Logging.IP
@@ -20,7 +21,8 @@ namespace Test.AMT.Extensions.Logging.IP
         public void verify_each_loglevel()
         {
             // Prepare listener to receive messages; isolate port for message count
-            var opts = new Ext.UdpLoggerOptions(new IPEndPoint(IPAddress.Loopback, 17460));
+            var opts = new Ext.UdpLoggerOptions(new IPEndPoint(IPAddress.Loopback, GetNextPort()));
+            _outputHelper.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
 
             using (_receiver = new UdpReceiver())
             {
@@ -51,8 +53,9 @@ namespace Test.AMT.Extensions.Logging.IP
         [Fact]
         public void verify_logs_with_null_data()
         {
-            // Prepare listener to receive messages
-            var opts = new Ext.UdpLoggerOptions();
+            // Prepare options for logger and receiver
+            var opts = new Ext.UdpLoggerOptions(new IPEndPoint(IPAddress.Loopback, GetNextPort()));
+            _outputHelper.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
 
             // Add options to provider before create logger
             _provider = new Ext.UdpLoggerProvider(opts);
@@ -85,8 +88,8 @@ namespace Test.AMT.Extensions.Logging.IP
         [Fact]
         public void verify_few_log_messages()
         {
-            // Prepare listener to receive messages
-            var opts = new Ext.UdpLoggerOptions();
+            // Prepare options for logger and receiver
+            var opts = new Ext.UdpLoggerOptions(new IPEndPoint(IPAddress.Loopback, GetNextPort()));
             _outputHelper.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
 
             // Add options to provider before create logger
@@ -123,8 +126,9 @@ namespace Test.AMT.Extensions.Logging.IP
         [Fact]
         public void verify_begin_scope()
         {
-            // Prepare listener to receive messages
-            var opts = new Ext.UdpLoggerOptions();
+            // Prepare options for logger and receiver
+            var opts = new Ext.UdpLoggerOptions(new IPEndPoint(IPAddress.Loopback, GetNextPort()));
+            _outputHelper.WriteLine($"UDP options: {opts.IPEndPoint.ToString()}");
 
             using (_receiver = new UdpReceiver())
             {
@@ -161,6 +165,7 @@ namespace Test.AMT.Extensions.Logging.IP
         // DoSleep to allow for all msgs to be received
         private int _minReceiverSleep = 250;
         private void DoSleep() { System.Threading.Thread.Sleep(_minReceiverSleep); }
+        private int GetNextPort() { return Interlocked.Increment(ref _nextPort); }
 
         #region ITestOutputHelper
         private readonly ITestOutputHelper _outputHelper;
@@ -177,6 +182,7 @@ namespace Test.AMT.Extensions.Logging.IP
 
         private ILoggerProvider _provider;
         private ILogger _logger;
+        private int _nextPort = 17460;
         private UdpReceiver _receiver;
 
         private readonly object DEFAULT_STATE = "### Default state for testing ###";
