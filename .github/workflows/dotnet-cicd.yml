@@ -87,7 +87,7 @@ jobs:
 
       - name: Push NuGet packages
         run: >
-          dotnet nuget stage push "artifacts/*.nupkg"
+          dotnet package stage push "artifacts/*.nupkg"
           --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate
