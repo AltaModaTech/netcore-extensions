@@ -93,10 +93,6 @@ jobs:
           for package in artifacts/*.nupkg; do
             dotnet package stage push "$package" \
               --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+              --group netcore-extensions \
               --source https://api.nuget.org/v3/index.json
           done
-
-        # run: >
-        #   dotnet package stage push "artifacts/AMT.Extensions.Linq.nupkg"
-        #   --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
-        #   --source https://api.nuget.org/v3/index.json
